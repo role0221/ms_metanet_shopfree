@@ -11,7 +11,7 @@ import { QueryPage } from '@/decorator/pagination.decorator';
 import { FilterProductDto } from './dto/filter-product.dto';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ProductDto } from './dto/product.dto';
+import { ProductDto, ProductsDto } from './dto/product.dto';
 import { MSG_PRODUCT } from './product.schema';
 
 @ApiBearerAuth()
@@ -23,7 +23,7 @@ export class ProductController {
 
     @Post()
     @ApiOperation({ summary: `Create Product` })
-    @ApiOkResponse({ type: String })
+    @ApiOkResponse({ type: Number })
     @ApiBody({ type: CreateProductDto })
     async createProduct(@Res() res: FastifyReply,
         // @GetHeader(['hospCode', 'userCode', 'username']) header: HeaderDto, 
@@ -36,7 +36,7 @@ export class ProductController {
 
 
     @Get()
-    @ApiOkResponse({ type: ProductDto })
+    @ApiOkResponse({ type: ProductsDto })
     @ApiQuery({ type: FilterProductDto })
     @ApiOperation({ summary: `Get all product` })
     async findAllProduct(@Res() res: FastifyReply,
@@ -60,6 +60,7 @@ export class ProductController {
     }
 
     @Patch(`:productId`)
+    @ApiOkResponse({ type: Number })
     @ApiOperation({ summary: `Update detail product` })
     @ApiBody({ type: UpdateProductDto })
     async updateDetail(@Res() res: FastifyReply,
