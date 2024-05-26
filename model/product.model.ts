@@ -20,6 +20,13 @@ export class Product extends Model<Product> {
     @Column({ type: DataType.DECIMAL(10, 2), allowNull: false })
     price: number;
 
+    @Column({ type: DataType.STRING(250), allowNull: true })
+    category: string;
+
+    @Default(0)
+    @Column({ type: DataType.INTEGER, allowNull: false })
+    quantity: number;
+
     @Default(ROW_STATUS.ACTIVE)
     @Column({ type: DataType.ENUM(...Object.values(ROW_STATUS)) })
     status: ROW_STATUS;
@@ -42,5 +49,5 @@ export class Product extends Model<Product> {
 
 }
 
-export const ProductAttributes = ['productId', 'productName', 'price', 'status', 'updatedBy', 'updatedAt', 'createdBy', 'createdAt'];
-export const FilterProductAttributes = ['productId', 'productName', 'price'];
+export const ProductAttributes = ['productId', 'productName', 'price', 'category', 'quantity', 'status', 'updatedBy', 'updatedAt', 'createdBy', 'createdAt'];
+export const FilterProductAttributes = ['productId', 'productName', 'price', 'category', 'quantity'];
